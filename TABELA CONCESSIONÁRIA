@@ -1,0 +1,67 @@
+CREATE DATABASE CONCESSIONÁRIA;
+
+CREATE TABLE CLIENTE (
+		 IDCLIENTE INT PRIMARY KEY AUTO_INCREMENT,
+    NOME VARCHAR(100) NOT NULL,
+    CPF CHAR(11) NOT NULL UNIQUE,
+    SEXO CHAR(1),
+    EMAIL VARCHAR(100)
+	);
+	
+CREATE TABLE ENDERECO (
+    IDENDERECO INT PRIMARY KEY AUTO_INCREMENT,
+    RUA VARCHAR(100),
+    BAIRRO VARCHAR(100),
+    CEP CHAR(8),
+    CIDADE VARCHAR(100),
+    ESTADO CHAR(2),
+    IDCLIENTE INT,
+    FOREIGN KEY (IDCLIENTE) REFERENCES CLIENTE(IDCLIENTE)
+);
+CREATE TABLE TELEFONE (
+	IDTELEFONE INT PRIMARY KEY AUTO_INCREMENT,
+	NUMERO VARCHAR(20),
+	TIPO VARCHAR(20),
+	IDCLIENTE INT,
+	FOREIGN KEY(IDCLIENTE) REFERENCES CLIENTE(IDCLIENTE)
+);
+CREATE TABLE VEICULO (
+    IDVEICULO INT PRIMARY KEY AUTO_INCREMENT,
+    MODELO VARCHAR(100),
+    COR VARCHAR(30),
+    VALOR DECIMAL(10,2),
+    IDCLIENTE INT,
+    FOREIGN KEY (IDCLIENTE) REFERENCES CLIENTE(IDCLIENTE)
+);
+
+
+
+INSERT INTO CLIENTE (IDCLIENTE, NOME, CPF, SEXO, EMAIL) VALUES
+(1, 'João Silva', '12345678901', 'M', 'joao@gmail.com'),
+(2, 'Maria Oliveira', '23456789012', 'F', 'maria@gmail.com'),
+(3, 'Carlos Souza', '34567890123', 'M', 'carlos@gmail.com'),
+(4, 'Ana Santos', '45678901234', 'F', 'ana@gmail.com'),
+(5, 'Pedro Lima', '56789012345', 'M', 'pedro@gmail.com');
+
+INSERT INTO ENDERECO (IDENDERECO, RUA, BAIRRO, CEP, CIDADE, ESTADO, IDCLIENTE) VALUES
+(1, 'Rua das Flores', 'Centro', '50000000', 'Recife', 'PE', 1),
+(2, 'Av. Boa Viagem', 'Boa Viagem', '51000000', 'Recife', 'PE', 2),
+(3, 'Rua da Aurora', 'Santo Amaro', '52000000', 'Recife', 'PE', 3),
+(4, 'Rua Sete de Setembro', 'Centro', '70000000', 'Brasília', 'DF', 4),
+(5, 'Rua XV de Novembro', 'Centro', '80000000', 'Curitiba', 'PR', 5);
+
+
+INSERT INTO TELEFONE (IDTELEFONE, NUMERO, TIPO, IDCLIENTE) VALUES
+(1, '81999990001', 'Celular', 1),
+(2, '81999990002', 'Celular', 2),
+(3, '81999990003', 'Residencial', 3),
+(4, '81999990004', 'Comercial', 4),
+(5, '81999990005', 'Celular', 5);
+
+INSERT INTO VEICULO (IDVEICULO, MODELO, COR, VALOR, IDCLIENTE)
+VALUES
+(1, 'Honda Civic', 'Prata', 95000.00, 1),
+(2, 'Toyota Corolla', 'Branco', 120000.00, 2),
+(3, 'Fiat Argo', 'Vermelho', 78000.00, 3),
+(4, 'Chevrolet Onix', 'Preto', 85000.00, 4),
+(5, 'Hyundai HB20', 'Cinza', 82000.00, 5);
